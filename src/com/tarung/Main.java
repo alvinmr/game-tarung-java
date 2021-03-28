@@ -61,8 +61,9 @@ public class Main {
                         while (monster[iterate].health >= 0 || player.health >= 0) {
                             if (monster[iterate].health <= 0) {
                                 iterate++;
-                            } else if (player.health == 0) {
+                            } else if (player.health <= 0) {
                                 System.out.println("Kamu telah Mati!, Game berakhir");
+                                System.out.println("Ingat untuk lakukan meditasi sebelum melawan monster");
                                 done = true;
                                 keluar = true;
                                 break;
@@ -113,9 +114,12 @@ public class Main {
                                 Wait.time(1000);
                                 monster[iterate].useSpell(spell[randomSpell]);
                                 monster[iterate].attackPlayer(player);
-                                Console.log("Sisa health mu adalah " + player.health);
-                                System.out.print("\n\nklik enter untuk melanjutkan...");
-                                System.in.read();
+                                if (player.health >= 0) {
+                                    Console.log("Sisa health mu adalah " + player.health);
+                                } else {
+                                    Console.log("Health mu habis");
+                                }
+                                Console.wait("klik enter untuk melanjutkan...");
                             }
                         }
                         iterate++;

@@ -5,7 +5,18 @@ import com.utils.*;
 import java.io.IOException;
 import java.util.Random;
 
-public class Player extends NPC {
+interface Mode {
+    public void detail();
+
+    public void attackMonster(Monster opponent);
+
+    public void useSpell(Spell spell);
+
+    public int getPowerStat();
+
+}
+
+public class Player extends NPC implements Mode {
     private Spell spell;
     private int power;
 
@@ -15,7 +26,7 @@ public class Player extends NPC {
         this.power = 10;
     }
 
-    void detail() {
+    public void detail() {
         if (this.health <= 0) {
             this.health = 0;
         } else {
@@ -27,7 +38,7 @@ public class Player extends NPC {
         }
     }
 
-    void attackMonster(Monster opponent) {
+    public void attackMonster(Monster opponent) {
         Console.log(this.name + " menyerang monster!");
         Console.log(this.name + " menyerang menggunakan " + spell.name);
         opponent.health -= attackTotal();
@@ -46,11 +57,11 @@ public class Player extends NPC {
 
     }
 
-    void useSpell(Spell spell) {
+    public void useSpell(Spell spell) {
         this.spell = spell;
     }
 
-    void getStronger() throws IOException {
+    public void getStronger() throws IOException {
         Random random = new Random();
         int upPower = random.nextInt(100);
         Console.log("Tunggu sebentar sedang meditasi");
@@ -60,12 +71,11 @@ public class Player extends NPC {
             this.health += upPower / 2;
             Console.log("Berhasil bertambah kuat!");
             this.detail();
-            System.out.print("\n\nklik enter untuk melanjutkan...");
-            System.in.read();
+            Console.wait("klik enter untuk melanjutkan...");
+
         } else {
             Console.log("Menambah kuat gagal! Coba lagi");
-            System.out.print("\n\nklik enter untuk melanjutkan...");
-            System.in.read();
+            Console.wait("klik enter untuk melanjutkan...");
         }
     }
 

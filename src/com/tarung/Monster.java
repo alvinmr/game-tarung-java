@@ -10,9 +10,9 @@ public class Monster extends NPC {
         this.name = name;
     }
 
-    void attackPlayer(Player player) {
-        if (this.health <= 0) {
-            this.health = 0;
+    public void attackPlayer(Player player) {
+        if (player.health <= 0) {
+            player.health = 0;
         } else {
             Console.log(this.name + " menyerang!");
             Console.log(this.name + " menyerang menggunakan " + spell.name);
@@ -20,7 +20,7 @@ public class Monster extends NPC {
         }
     }
 
-    void detail() {
+    public void detail() {
         if (this.health <= 0) {
             this.health = 0;
         } else {
@@ -32,7 +32,7 @@ public class Monster extends NPC {
         }
     }
 
-    void useSpell(Spell spell) {
+    public void useSpell(Spell spell) {
         this.spell = spell;
     }
 }

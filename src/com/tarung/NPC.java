@@ -1,6 +1,8 @@
 package com.tarung;
 
-public class NPC {
+abstract class NPC {
     String name;
     int health;
+
+    public abstract void detail();
 }
